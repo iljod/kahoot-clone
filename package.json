@@ -1,0 +1,17 @@
+{
+  "name": "yupp-quiz",
+  "version": "1.0.0",
+  "description": "Kahoot-style quiz game deployable to GitHub Pages",
+  "type": "module",
+  "scripts": {
+    "dev": "bun run --hot src/server.ts",
+    "build": "bun build src/app.ts --outdir dist --minify && cp src/index.html dist/ && cp -r src/styles dist/ && cp -r quizzes dist/",
+    "preview": "cd dist && python3 -m http.server 3000"
+  },
+  "dependencies": {
+    "peerjs": "^1.5.4"
+  },
+  "devDependencies": {
+    "@types/bun": "latest"
+  }
+}

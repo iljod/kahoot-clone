@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yupp Quiz - Kahoot Clone</title>
+    <link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+    <div id="app">
+        <!-- Home Screen -->
+        <div id="home-screen" class="screen active">
+            <div class="container">
+                <h1 class="logo">YUPP!</h1>
+                <p class="tagline">multiplayer quiz game</p>
+                <div class="button-group">
+                    <button id="host-btn" class="btn btn-primary">Host Game</button>
+                    <button id="join-btn" class="btn btn-secondary">Join Game</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Host Setup Screen -->
+        <div id="host-setup-screen" class="screen">
+            <div class="container">
+                <h2>Host a Quiz</h2>
+                <div class="form-group">
+                    <label for="quiz-select">Select Quiz:</label>
+                    <select id="quiz-select" class="input">
+                        <option value="">Loading quizzes...</option>
+                    </select>
+                </div>
+                <button id="start-hosting-btn" class="btn btn-primary">Create Game</button>
+                <button id="back-from-host-btn" class="btn btn-secondary">Back</button>
+            </div>
+        </div>
+
+        <!-- Host Lobby Screen -->
+        <div id="host-lobby-screen" class="screen">
+            <div class="container">
+                <h2>Game PIN</h2>
+                <div class="game-pin" id="game-pin">000000</div>
+                <p class="instruction">Players can join at this URL with the PIN above</p>
+                <div class="players-waiting">
+                    <h3>Players Joined: <span id="player-count">0</span></h3>
+                    <div id="players-list" class="players-list"></div>
+                </div>
+                <button id="start-game-btn" class="btn btn-primary">Start Game</button>
+                <button id="cancel-host-btn" class="btn btn-secondary">Cancel</button>
+            </div>
+        </div>
+
+        <!-- Player Join Screen -->
+        <div id="join-screen" class="screen">
+            <div class="container">
+                <h2>Join a Game</h2>
+                <div class="form-group">
+                    <label for="player-name">Your Name:</label>
+                    <input type="text" id="player-name" class="input" placeholder="Enter your name" maxlength="20">
+                </div>
+                <div class="form-group">
+                    <label for="game-pin-input">Game PIN:</label>
+                    <input type="text" id="game-pin-input" class="input" placeholder="Enter 6-digit PIN" maxlength="6">
+                </div>
+                <button id="join-game-btn" class="btn btn-primary">Join</button>
+                <button id="back-from-join-btn" class="btn btn-secondary">Back</button>
+                <div id="join-error" class="error-message"></div>
+            </div>
+        </div>
+
+        <!-- Player Lobby Screen -->
+        <div id="player-lobby-screen" class="screen">
+            <div class="container">
+                <h2>Waiting for game to start...</h2>
+                <p class="player-name-display">You are: <strong id="your-name"></strong></p>
+                <div class="players-waiting">
+                    <h3>Players in Lobby: <span id="lobby-player-count">0</span></h3>
+                    <div id="lobby-players-list" class="players-list"></div>
+                </div>
+                <button id="leave-lobby-btn" class="btn btn-secondary">Leave Game</button>
+            </div>
+        </div>
+
+        <!-- Question Screen (Host) -->
+        <div id="host-question-screen" class="screen">
+            <div class="container">
+                <div class="question-header">
+                    <div class="question-number">Question <span id="host-q-number">1</span>/<span id="host-q-total">5</span></div>
+                    <div class="timer" id="host-timer">20</div>
+                </div>
+                <div class="question-display">
+                    <h2 id="host-question-text">Question goes here?</h2>
+                </div>
+                <div class="answers-grid" id="host-answers-grid">
+                    <div class="answer-box answer-1"><span class="answer-icon">▲</span><span class="answer-text">Answer 1</span></div>
+                    <div class="answer-box answer-2"><span class="answer-icon">◆</span><span class="answer-text">Answer 2</span></div>
+                    <div class="answer-box answer-3"><span class="answer-icon">●</span><span class="answer-text">Answer 3</span></div>
+                    <div class="answer-box answer-4"><span class="answer-icon">■</span><span class="answer-text">Answer 4</span></div>
+                </div>
+                <div class="responses-count">
+                    <span id="responses-count">0</span>/<span id="total-players">0</span> answered
+                </div>
+            </div>
+        </div>
+
+        <!-- Question Screen (Player) -->
+        <div id="player-question-screen" class="screen">
+            <div class="container">
+                <div class="question-header">
+                    <div class="question-number">Question <span id="player-q-number">1</span>/<span id="player-q-total">5</span></div>
+                    <div class="timer" id="player-timer">20</div>
+                </div>
+                <div class="question-display">
+                    <h2 id="player-question-text">Question goes here?</h2>
+                </div>
+                <div class="answers-grid" id="player-answers-grid">
+                    <button class="answer-btn answer-1" data-answer="0"><span class="answer-icon">▲</span><span class="answer-text">Answer 1</span></button>
+                    <button class="answer-btn answer-2" data-answer="1"><span class="answer-icon">◆</span><span class="answer-text">Answer 2</span></button>
+                    <button class="answer-btn answer-3" data-answer="2"><span class="answer-icon">●</span><span class="answer-text">Answer 3</span></button>
+                    <button class="answer-btn answer-4" data-answer="3"><span class="answer-icon">■</span><span class="answer-text">Answer 4</span></button>
+                </div>
+                <div id="answer-feedback" class="answer-feedback"></div>
+            </div>
+        </div>
+
+        <!-- Results Screen -->
+        <div id="results-screen" class="screen">
+            <div class="container">
+                <h2>Question Results</h2>
+                <div class="correct-answer-display">
+                    <p class="correct-label">Correct Answer:</p>
+                    <div id="correct-answer-text" class="correct-answer"></div>
+                </div>
+                <div class="leaderboard">
+                    <h3>Leaderboard</h3>
+                    <div id="leaderboard-list" class="leaderboard-list"></div>
+                </div>
+                <button id="next-question-btn" class="btn btn-primary">Next Question</button>
+            </div>
+        </div>
+
+        <!-- Final Results Screen -->
+        <div id="final-results-screen" class="screen">
+            <div class="container">
+                <h1>Game Over!</h1>
+                <div class="podium">
+                    <div class="podium-place second">
+                        <div class="rank">2nd</div>
+                        <div class="player-name" id="second-place">-</div>
+                        <div class="score" id="second-score">0</div>
+                    </div>
+                    <div class="podium-place first">
+                        <div class="crown">👑</div>
+                        <div class="rank">1st</div>
+                        <div class="player-name" id="first-place">-</div>
+                        <div class="score" id="first-score">0</div>
+                    </div>
+                    <div class="podium-place third">
+                        <div class="rank">3rd</div>
+                        <div class="player-name" id="third-place">-</div>
+                        <div class="score" id="third-score">0</div>
+                    </div>
+                </div>
+                <div class="final-leaderboard">
+                    <h3>Final Standings</h3>
+                    <div id="final-leaderboard-list" class="leaderboard-list"></div>
+                </div>
+                <button id="new-game-btn" class="btn btn-primary">New Game</button>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="app.js"></script>
+</body>
+</html>

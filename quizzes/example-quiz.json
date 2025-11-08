@@ -1,0 +1,37 @@
+{
+  "title": "General Knowledge Quiz",
+  "description": "Test your knowledge on various topics",
+  "timePerQuestion": 20,
+  "questions": [
+    {
+      "question": "What is the capital of France?",
+      "answers": ["London", "Berlin", "Paris", "Madrid"],
+      "correctAnswer": 2,
+      "points": 1000
+    },
+    {
+      "question": "Which planet is known as the Red Planet?",
+      "answers": ["Venus", "Mars", "Jupiter", "Saturn"],
+      "correctAnswer": 1,
+      "points": 1000
+    },
+    {
+      "question": "What year did World War II end?",
+      "answers": ["1943", "1944", "1945", "1946"],
+      "correctAnswer": 2,
+      "points": 1000
+    },
+    {
+      "question": "Who painted the Mona Lisa?",
+      "answers": ["Vincent van Gogh", "Pablo Picasso", "Leonardo da Vinci", "Michelangelo"],
+      "correctAnswer": 2,
+      "points": 1000
+    },
+    {
+      "question": "What is the largest ocean on Earth?",
+      "answers": ["Atlantic Ocean", "Indian Ocean", "Arctic Ocean", "Pacific Ocean"],
+      "correctAnswer": 3,
+      "points": 1000
+    }
+  ]
+}
